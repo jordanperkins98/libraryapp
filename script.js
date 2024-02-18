@@ -35,19 +35,18 @@ function render() {
         <div class="book-info">
             <div class="image"></div>
                 <div class="info">
-                    <h2 class="title">${book.title}</h2>
+                    <h4 class="title">${book.title}</h4>
                     <p class="author">${book.author}</p>
                     <p class="pages">${book.pages} Pages</p>
                 </div>
         </div>
         <div class="read-status">
             <div class="datalist">
-            <input list="read-statuses" name="read-status-list" class="read-status-list" value="${book.status}">
-                <datalist id="read-statuses">
-                    <option value="To read"></option>
-                    <option value="Reading"></option>
-                    <option value="Read"></option>
-                </datalist>
+                <select name="read-status-list" class="read-statuses">
+                    <option value="To read">To read</option>
+                    <option value="Reading">Reading</option>
+                    <option value="Read">Read</option>
+                </select>
             </div>
             <button class="mark-owned">Mark as Owned</button>
             <button class="remove-book" data-index="${index}">Remove</button>            
@@ -73,6 +72,15 @@ function render() {
         const correctDiv = document.querySelector(`.${classStatus}`);
 
         correctDiv.appendChild(card);
+
+        const selectElement = card.querySelector('.read-statuses');
+        const options = selectElement.options;
+        for (let i= 0; i < options.length; i++) {
+            if (options[i].value === book.status) {
+                options[i].selected = true;
+            }
+        }
+
     } )
 
 
