@@ -1,11 +1,12 @@
 
 const myLibrary = [];
 
-function Book(title, author,pages, status) {
+function Book(title, author,pages, status, imagesrc) {
     this.title = title;
     this.author = author;
     this.pages = pages;
     this.status = status;
+    this.imagesrc = imagesrc;
     this.info = function(){
         return `${title} by ${author}, ${pages} pages, ${status}`
     };
@@ -93,7 +94,7 @@ function render() {
         card.classList.add('card-row');
         card.innerHTML = `
         <div class="book-info">
-            <div class="image"></div>
+            <img alt="book cover" class="image" src=${book.imagesrc}>
                 <div class="info">
                     <h4 class="title">${book.title}</h4>
                     <p class="author">${book.author}</p>
@@ -126,7 +127,7 @@ function render() {
 
 }
 
-const book1 = new Book('The Hobbit', 'J.R.R. Tolkien', 295, 'To read');
-const book2 = new Book('The Fellowship of the Ring', 'J.R.R. Tolkien', 423, 'Reading');
+const book1 = new Book('The Hobbit', 'J.R.R. Tolkien', 295, 'To read','Assets/thehobbitcover.jpg');
+const book2 = new Book('The Fellowship of the Ring', 'J.R.R. Tolkien', 423, 'Reading', 'Assets/FellowshipoftheRingcover.jpg');
 myLibrary.push(book1, book2);
 render();
