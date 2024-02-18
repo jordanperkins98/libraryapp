@@ -7,8 +7,8 @@
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <div class="form-container">
-
+    <div class="form-container hidden">
+        <img alt="close" src="Assets/close.svg" class="close">
         <form>
             <h2>Add Book</h2>
             <div class="form-group">
@@ -26,12 +26,12 @@
             <div class="form-group">
             <label for="status">Status:</label>
                 <select id="status" name="status">
-                    <option value="to-read">To Read</option>
-                    <option value="reading">Reading</option>
-                    <option value="read">Read</option>
+                    <option value="To read">To Read</option>
+                    <option value="Reading">Reading</option>
+                    <option value="Read">Read</option>
                 </select>
             </div>
-            <button type="submit">Add Book</button>
+            <button class='submit' type="submit">Add Book</button>
         </form>
     </div>
 <div class="nav">

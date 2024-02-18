@@ -12,6 +12,14 @@ function Book(title, author,pages, status, imagesrc) {
     };
 }
 
+function addBookToLibrary(title, author, pages, status, imagesrc) {
+    const newBook = new Book(title, author, pages, status, imagesrc);
+    myLibrary.push(newBook);
+    render();
+    const form = document.querySelector('.form-container');
+    form.classList.toggle('hidden');
+}
+
 function removeBookFromLibrary(index) {
     myLibrary.splice(index, 1);
 }
@@ -33,6 +41,48 @@ function removeEventListener(card) {
         render();
     });
 }
+
+function addBookEventListener() {
+    const addBookButton = document.querySelector('.add-buttton');
+    addBookButton.addEventListener('click', () => {
+        const form = document.querySelector('.form-container');
+        form.classList.toggle('hidden');
+    });
+}
+
+function closeFormEventListener() {
+    const closeButton = document.querySelector('.close');
+    closeButton.addEventListener('click', () => {
+        const form = document.querySelector('.form-container');
+        form.classList.toggle('hidden');
+    });
+}
+
+function preventSubmitDefault() {
+    const form = document.querySelector('form');
+    form.addEventListener('submit', (e) => {
+        e.preventDefault();
+    });
+}
+
+function submitEventListener() {
+    const submitButton = document.querySelector('.submit');
+    submitButton.addEventListener('click', () => {
+        console.log(document.querySelector('#status').selectedIndex);
+        const title = document.querySelector('#title').value;
+        const author = document.querySelector('#author').value;
+        const pages = document.querySelector('#pages').value;
+
+        const selectElement = document.querySelector('#status');
+        const selectedIndexValue = selectElement.selectedIndex;
+        const bookStatus = selectElement.options[selectedIndexValue].value;
+        const imagesrc = 'Assets/placeholder.png';
+
+        addBookToLibrary(title, author, pages, bookStatus, imagesrc);
+    });
+}
+
+
 
 function render() {
 
@@ -129,19 +179,10 @@ const book1 = new Book('The Hobbit', 'J.R.R. Tolkien', 295, 'To read','Assets/th
 const book2 = new Book('The Fellowship of the Ring', 'J.R.R. Tolkien', 423, 'Reading', 'Assets/FellowshipoftheRingcover.jpg');
 myLibrary.push(book1, book2);
 render();
-
-const addBookButton = document.querySelector('.add-buttton');
-addBookButton.addEventListener('click', () => {
-    const title = prompt('Title?');
-    const author = prompt('Author?');
-    const pages = prompt('Pages?');
-    const status = prompt('Status?');
-    const imagesrc = prompt('Image source?');
-    const newBook = new Book(title, author, pages, status, imagesrc);
-    myLibrary.push(newBook);
-    render();
-});
-
+addBookEventListener();
+closeFormEventListener();
+submitEventListener();
+preventSubmitDefault();
 
 
 
