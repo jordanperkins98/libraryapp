@@ -76,7 +76,7 @@ function submitEventListener() {
         const selectElement = document.querySelector('#status');
         const selectedIndexValue = selectElement.selectedIndex;
         const bookStatus = selectElement.options[selectedIndexValue].value;
-        const imagesrc = 'Assets/placeholder.png';
+        const imagesrc = './Assets/placeholder.png';
 
         addBookToLibrary(title, author, pages, bookStatus, imagesrc);
     });
@@ -175,8 +175,8 @@ function render() {
 
 }
 
-const book1 = new Book('The Hobbit', 'J.R.R. Tolkien', 295, 'To read','Assets/thehobbitcover.jpg');
-const book2 = new Book('The Fellowship of the Ring', 'J.R.R. Tolkien', 423, 'Reading', 'Assets/FellowshipoftheRingcover.jpg');
+const book1 = new Book('The Hobbit', 'J.R.R. Tolkien', 295, 'To read','./Assets/thehobbitcover.jpg');
+const book2 = new Book('The Fellowship of the Ring', 'J.R.R. Tolkien', 423, 'Reading', './Assets/FellowshipoftheRingcover.jpg');
 myLibrary.push(book1, book2);
 render();
 addBookEventListener();
