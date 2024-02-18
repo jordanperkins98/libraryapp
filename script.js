@@ -19,6 +19,24 @@ function removeBookFromLibrary(index) {
     myLibrary.splice(index, 1);
 }
 
+function selectEventListener(card) {
+    const selectElement = card.querySelector('.read-statuses');
+    selectElement.addEventListener('change', () => {
+        const index = selectElement.parentElement.parentElement.querySelector('.remove-book').dataset.index;
+        myLibrary[index].status = selectElement.value;
+        render();
+    });
+}
+
+function removeEventListener(card) {
+    const removeButton = card.querySelector('.remove-book');
+    removeButton.addEventListener('click', () => {
+        const index = removeButton.dataset.index;
+        removeBookFromLibrary(index);
+        render();
+    });
+}
+
 function render() {
 
     // Clear the current library
@@ -63,19 +81,9 @@ function render() {
 
     function addEventListeners(card) {
 
-        const removeButton = card.querySelector('.remove-book');
-        removeButton.addEventListener('click', () => {
-            const index = removeButton.dataset.index;
-            removeBookFromLibrary(index);
-            render();
-        });
+        removeEventListener(card);
 
-        const selectElement = card.querySelector('.read-statuses');
-        selectElement.addEventListener('change', () => {
-            const index = selectElement.parentElement.parentElement.querySelector('.remove-book').dataset.index;
-            myLibrary[index].status = selectElement.value;
-            render();
-        });
+        selectEventListener(card);
 
     }
 
