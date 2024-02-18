@@ -116,11 +116,6 @@ function render() {
 
     } )
 
-
-    //TODO
-    // add event listeners to each card to change the status of the book
-    // add event listeners to each card to remove it from the library
-
 }
 
 const book1 = new Book('The Hobbit', 'J.R.R. Tolkien', 295, 'To read');
