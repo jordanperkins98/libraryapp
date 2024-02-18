@@ -102,15 +102,17 @@ function render() {
                 </div>
         </div>
         <div class="read-status">
-            <div class="datalist">
+            <div class="select-wrapper">
                 <select name="read-status-list" class="read-statuses">
                     <option value="To read">To read</option>
                     <option value="Reading">Reading</option>
                     <option value="Read">Read</option>
                 </select>
             </div>
-            <button class="mark-owned">Mark as Owned</button>
-            <button class="remove-book" data-index="${index}">Remove</button>            
+            <div class="buttons">
+                <button class="mark-owned">Mark as Owned</button>
+                <button class="remove-book" data-index="${index}">Remove</button>
+            </div>            
         </div>
         `;
 
