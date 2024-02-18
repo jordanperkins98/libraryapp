@@ -12,10 +12,6 @@ function Book(title, author,pages, status, imagesrc) {
     };
 }
 
-function addBookToLibrary() {
-
-}
-
 function removeBookFromLibrary(index) {
     myLibrary.splice(index, 1);
 }
@@ -133,3 +129,19 @@ const book1 = new Book('The Hobbit', 'J.R.R. Tolkien', 295, 'To read','Assets/th
 const book2 = new Book('The Fellowship of the Ring', 'J.R.R. Tolkien', 423, 'Reading', 'Assets/FellowshipoftheRingcover.jpg');
 myLibrary.push(book1, book2);
 render();
+
+const addBookButton = document.querySelector('.add-buttton');
+addBookButton.addEventListener('click', () => {
+    const title = prompt('Title?');
+    const author = prompt('Author?');
+    const pages = prompt('Pages?');
+    const status = prompt('Status?');
+    const imagesrc = prompt('Image source?');
+    const newBook = new Book(title, author, pages, status, imagesrc);
+    myLibrary.push(newBook);
+    render();
+});
+
+
+
+
