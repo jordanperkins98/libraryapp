@@ -22,11 +22,63 @@ function removeBookFromLibrary(index) {
 function render() {
 
     // Clear the current library
-    const library = document.querySelector('.library');
-    library.innerHTML = '';
+    const library = document.querySelectorAll('.library');
+
+    library.forEach( (node) => node.innerHTML = '');
+
     console.log("Cleared library");
+    console.log(library)
 
     console.log("Rendering library...");
+
+    function setDefaultSelectOption(card, book) {
+        const selectElement = card.querySelector('.read-statuses');
+        const options = selectElement.options;
+        for (let i = 0; i < options.length; i++) {
+            if (options[i].value === book.status) {
+                options[i].selected = true;
+            }
+        }
+    }
+
+    function getReadStatusClass(book) {
+        let classStatus = '';
+
+        switch (book.status) {
+            case 'To read':
+                classStatus = 'to-read';
+                break;
+            case 'Reading':
+                classStatus = 'reading';
+                break;
+            case 'Read':
+                classStatus = 'read';
+                break;
+        }
+
+        console.log("Class status: ", classStatus);
+
+        return document.querySelector(`.${classStatus}`);
+    }
+
+    function addEventListeners(card) {
+
+        const removeButton = card.querySelector('.remove-book');
+        removeButton.addEventListener('click', () => {
+            const index = removeButton.dataset.index;
+            removeBookFromLibrary(index);
+            render();
+        });
+
+        const selectElement = card.querySelector('.read-statuses');
+        selectElement.addEventListener('change', () => {
+            const index = selectElement.parentElement.parentElement.querySelector('.remove-book').dataset.index;
+            myLibrary[index].status = selectElement.value;
+            render();
+        });
+
+    }
+
     myLibrary.forEach((book, index) => {
         console.log("Rendering book: ", book.title, " at index: ", index)
         const card = document.createElement('div');
@@ -53,40 +105,20 @@ function render() {
         </div>
         `;
 
-        let classStatus = '';
-
-        switch(book.status) {
-            case 'To read':
-                classStatus = 'to-read';
-                break;
-            case 'Reading':
-                classStatus = 'reading';
-                break;
-            case 'Read':
-                classStatus = 'read';
-                break;
-        }
-
-        console.log("Class status: ", classStatus);
-
-        const correctDiv = document.querySelector(`.${classStatus}`);
+        const correctDiv = getReadStatusClass(book);
 
         correctDiv.appendChild(card);
 
-        const selectElement = card.querySelector('.read-statuses');
-        const options = selectElement.options;
-        for (let i= 0; i < options.length; i++) {
-            if (options[i].value === book.status) {
-                options[i].selected = true;
-            }
-        }
+        setDefaultSelectOption(card, book);
+
+        addEventListeners(card);
+
 
     } )
 
 
     //TODO
-    // loop through myLibrary and create a new card for each book or enough to fit on the screen.
-    // display each card
+    // add event listeners to each card to change the status of the book
     // add event listeners to each card to remove it from the library
 
 }
