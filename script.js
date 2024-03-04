@@ -1,28 +1,37 @@
 
 const myLibrary = [];
 
-function Book(title, author,pages, status, imagesrc) {
+class Book {
+
+constructor(title, author,pages, status, imagesrc){
     this.title = title;
     this.author = author;
     this.pages = pages;
     this.status = status;
     this.imagesrc = imagesrc;
-    this.info = function(){
-        return `${title} by ${author}, ${pages} pages, ${status}`
-    };
+    
+    }
+
+    static addBookToLibrary(title, author, pages, status, imagesrc) {
+        const newBook = new Book(title, author, pages, status, imagesrc);
+        myLibrary.push(newBook);
+        render();
+        const form = document.querySelector('.form-container');
+        form.classList.toggle('hidden');
+    }
+
+    static removeBookFromLibrary(index) {
+        myLibrary.splice(index, 1);
+    }
+
+    info(){
+    return `${title} by ${author}, ${pages} pages, ${status}`
+    }
+
 }
 
-function addBookToLibrary(title, author, pages, status, imagesrc) {
-    const newBook = new Book(title, author, pages, status, imagesrc);
-    myLibrary.push(newBook);
-    render();
-    const form = document.querySelector('.form-container');
-    form.classList.toggle('hidden');
-}
 
-function removeBookFromLibrary(index) {
-    myLibrary.splice(index, 1);
-}
+
 
 function selectEventListener(card) {
     const selectElement = card.querySelector('.read-statuses');
@@ -37,7 +46,7 @@ function removeEventListener(card) {
     const removeButton = card.querySelector('.remove-book');
     removeButton.addEventListener('click', () => {
         const index = removeButton.dataset.index;
-        removeBookFromLibrary(index);
+        Book.removeBookFromLibrary(index);
         render();
     });
 }
@@ -78,7 +87,7 @@ function submitEventListener() {
         const bookStatus = selectElement.options[selectedIndexValue].value;
         const imagesrc = './Assets/placeholder.png';
 
-        addBookToLibrary(title, author, pages, bookStatus, imagesrc);
+        Book.addBookToLibrary(title, author, pages, bookStatus, imagesrc);
     });
 }
 
